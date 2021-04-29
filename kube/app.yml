@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-app
+  namespace: dev
+  labels:
+    tier: backend
+spec:
+  selector:
+    matchLabels:
+      app: app
+      tier: backend
+  replicas: 1
+  template:
+    metadata:
+      namespace: dev
+      labels:
+        app: app
+        tier: backend
+    spec:        
+      containers:
+      - name: app
+        image: ryanface/activemq-cli:0.1
+        ports:
+          - containerPort: 8080
+            name: "http-server"            
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lb-app
+  namespace: dev
+  labels:
+    app: app
+    tier: backend
+spec:
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    targetPort: http-server
+    port: 8080
+  selector:
+    app: app
+    tier: backend

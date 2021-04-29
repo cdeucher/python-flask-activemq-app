@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-activemq
+  namespace: dev
+  labels:
+    tier: backend
+spec:
+  selector:
+    matchLabels:
+      app: activemq
+      tier: backend
+  replicas: 1
+  template:
+    metadata:
+      namespace: dev
+      labels:
+        app: activemq
+        tier: backend
+    spec:        
+      containers:
+      - name: activemq
+        image: ryanface/activemq-metrics:0.1
+        ports:
+          - containerPort: 8161
+            name: admin
+          - containerPort: 61616
+            name: openwire
+          - containerPort: 61613
+            name: stomp  
+          - containerPort: 8080
+            name: metrics            
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "1G"
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: activemq
+  namespace: dev
+  labels:
+    app: app
+    tier: backend
+spec:
+  type: LoadBalancer
+  ports:
+  - name: "openwire"
+    protocol: TCP
+    targetPort: "openwire"
+    port: 61616
+  - name: "stomp"
+    protocol: TCP
+    targetPort: "stomp"
+    port: 61613    
+  - name: "adminx"
+    protocol: TCP
+    targetPort: "admin"
+    port: 8161  
+  - name: "metrics"
+    protocol: TCP
+    targetPort: "metrics"
+    port: 8080    
+  selector:
+    app: app
+    tier: backend                

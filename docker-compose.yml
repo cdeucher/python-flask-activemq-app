@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  activemq:
+    image: rmohr/activemq:5.10.0
+    container_name: activemq
+    environment:
+      - "TZ=Europe/Amsterdam"
+    #volumes:
+    #  - "./activemq/activemq.xml:/conf/activemq.xml"
+    ports:
+      - "61616:61616" # broker 
+      - "61613:61613" # broker 
+      - "8161:8161"   # web   (admin:admin) 
+                      # update app word: {"answer":"hello","word":7,"tip":"__ __ __ __ __ __ __ : new tip for7 ?","winner":""}
+  app:
+    image: ryanface/activemq-cli:0.1
+    container_name: app
+    ports: 
+        - "80:8080"   # web http://localhost
+    links: 
+        - activemq:activemq       
