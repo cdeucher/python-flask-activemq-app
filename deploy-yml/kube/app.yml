@@ -10,7 +10,7 @@ spec:
     matchLabels:
       app: app
       tier: backend
-  replicas: 1
+  replicas: 5
   template:
     metadata:
       namespace: dev
@@ -49,3 +49,20 @@ spec:
   selector:
     app: app
     tier: backend
+---   
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ing-app
+  namespace: dev
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: app.internal.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: lb-app
+          servicePort: 8080 

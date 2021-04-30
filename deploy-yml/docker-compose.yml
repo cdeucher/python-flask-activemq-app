@@ -20,3 +20,9 @@ services:
         - "80:8080"   # web http://localhost
     links: 
         - activemq:activemq       
+
+# {"answer":"hello","word":7,"tip":"__ __ __ __ __ __ __ : new tip for7 ?","winner":""}
+# {"answer":"hello","word":7,"tip":"__ __ __ __ __ __ __ : new tip for7 ?","winner":""}
+# {"answer":"hello","word":7,"tip":"__ __ __ __ __ __ __ : new tip for7 ?","winner":""}
+# {"answer":"hello","word":7,"tip":"__ __ __ __ __ __ __ : new tip for7 ?","winner":""}
+# {"answer":"hello","word":7,"tip":"__ __ __ __ __ __ __ : new tip for7 ?","winner":""}        
