@@ -1,6 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 __pycache__
 =======
+=======
+>>>>>>> fix merge
 ### Jetbrains ###
 .idea/
 *.iml
@@ -155,4 +158,10 @@ Thumbs.db
 
 # profiling data
 .prof
+<<<<<<< HEAD
 >>>>>>> add first
+=======
+=======
+__pycache__
+>>>>>>> fix merge
+>>>>>>> fix merge
