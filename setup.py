@@ -4,7 +4,7 @@ setup(
 	name='activemq-app',
 	version='1.0.0a1',
 	author='Cristiano Deucher',
-	author_email='cristiano.deucher@objective.com.br',
+	author_email='cristiano.deucher@cabd.link,
 	description='App with Flask and ActiveMQ',
 	url='',
 	keywords=['objective', 'activemq', 'flask'],
